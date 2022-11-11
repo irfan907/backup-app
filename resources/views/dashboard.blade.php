@@ -2,5 +2,5 @@
 @section('title','Dashboard')
 
 @section('content')
-Here content
+Dashboard Here
 @endsection

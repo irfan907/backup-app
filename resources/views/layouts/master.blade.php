@@ -27,7 +27,10 @@
 <link type="text/css" href="{{ asset('volt/css/volt.css') }}" rel="stylesheet">
 <!-- Font awesome -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
+<!-- Alpine js -->
+<script defer src="https://unpkg.com/alpinejs@3.10.5/dist/cdn.min.js"></script>
+@stack('styles')
+@livewireStyles
 </head>
 
 <body>
@@ -84,6 +87,14 @@
             <svg class="icon icon-xs me-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z"></path><path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z"></path></svg>
           </span> 
           <span class="sidebar-text">Dashboard</span>
+        </a>
+      </li>
+      <li class="nav-item  active ">
+        <a href="{{ route('users.index') }}" class="nav-link">
+          <span class="sidebar-icon">
+            <i class="fas fa-users"></i>
+          </span> 
+          <span class="sidebar-text">User Management</span>
         </a>
       </li>
       <li class="nav-item">
@@ -441,7 +452,62 @@
         
     }
 </script>
-    
+
+<script>
+
+    var toastMixin = Swal.mixin({
+        toast: true,
+        icon: 'success',
+        title: 'General Title',
+        position: 'top-right',
+        showConfirmButton: false,
+        timer: 3000,
+    });
+
+    window.addEventListener('success-notification', event => {
+        toastMixin.fire({
+            title: event.detail.message,
+            icon:'success'
+        });
+    })
+
+    window.addEventListener('info-notification', event => {
+        toastMixin.fire({
+            title: event.detail.message,
+            icon:'info'
+        });
+    })
+    window.addEventListener('error-notification', event => {
+        toastMixin.fire({
+            title: event.detail.message,
+            icon:'error'
+        });
+    })
+    window.addEventListener('warning-notification', event => {
+        toastMixin.fire({
+            title: event.detail.message,
+            icon:'warning'
+        });
+    })
+
+    window.addEventListener('success-prompt', event => {
+        Swal.fire(
+            'Success!',
+            event.detail.message,
+            'success'
+        )
+    })
+
+    window.addEventListener('error-prompt', event => {
+        Swal.fire(
+            'Error!',
+            event.detail.message,
+            'error'
+        )
+    })
+</script>
+@stack('scripts')
+@livewireScripts
 </body>
 
 </html>

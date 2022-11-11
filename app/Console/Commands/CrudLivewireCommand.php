@@ -30,7 +30,8 @@ class CrudLivewireCommand extends Command
         $this->file = new Filesystem();
         $this->formFields=[
             ['name'=>'name','type'=>'string'],
-            ['name'=>'price','type'=>'string'],
+            ['name'=>'email','type'=>'string'],
+            ['name'=>'password','type'=>'string'],
         ];
     }
 
