@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Livewire\Component;
 use Livewire\WithPagination;
+use Spatie\Permission\Models\Role;
 
 class UserManagementComponent extends Component
 {
@@ -14,6 +15,8 @@ class UserManagementComponent extends Component
 
     public User $user;
     public $password;
+    public $allRoles=[];
+    public $selectedRole;
     public $editableMode=false;
     public bool $isNewUser=false;
 
@@ -26,14 +29,17 @@ class UserManagementComponent extends Component
     public function mount()
     {
         $this->user=new User();
+        $this->allRoles=Role::all();
     }
 
     public function createOrEdit($id=null)
     {
+        $this->selectedRole=null;
         if($id)
         {
             $this->user=User::find($id);
             $this->isNewUser=false;
+            $this->selectedRole=$this->user->getRoleNames()->first();
         }
         else{
             $this->user=new User();
@@ -56,6 +62,7 @@ class UserManagementComponent extends Component
         }else{
             $this->user->save();
         }
+        $this->user->syncRoles($this->selectedRole);
         $this->editableMode=false;
         $this->dispatchBrowserEvent('success-notification',['message'=>'User saved successfully.']);
     }

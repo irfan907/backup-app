@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 use Spatie\Permission\Models\Permission;
 
 class PermissionSeeder extends Seeder
@@ -14,9 +15,18 @@ class PermissionSeeder extends Seeder
      */
     public function run()
     {
-        Permission::create(['name' => 'view-users']);
-        Permission::create(['name' => 'add-users']);
-        Permission::create(['name' => 'edit-users']);
-        Permission::create(['name' => 'delete-users']);
+        DB::statement("SET foreign_key_checks=0");
+        Permission::truncate();
+        DB::statement("SET foreign_key_checks=1");
+        
+        Permission::create(['name' => 'users-view']);
+        Permission::create(['name' => 'users-add']);
+        Permission::create(['name' => 'users-edit']);
+        Permission::create(['name' => 'users-delete']);
+
+        Permission::create(['name' => 'roles-view']);
+        Permission::create(['name' => 'roles-add']);
+        Permission::create(['name' => 'roles-edit']);
+        Permission::create(['name' => 'roles-delete']);
     }
 }

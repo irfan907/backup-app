@@ -5,6 +5,7 @@ namespace App\Http\Livewire;
 use Spatie\Permission\Models\Role;
 use Livewire\Component;
 use Livewire\WithPagination;
+use Spatie\Permission\Models\Permission;
 
 class RoleManagementComponent extends Component
 {
@@ -13,6 +14,8 @@ class RoleManagementComponent extends Component
 
     public Role $role;
     public $editableMode=false;
+    public $allPermissions;
+    public $selectedPermissions=[];
 
     protected $rules=[
         'role.name'=>'required',        
@@ -21,6 +24,7 @@ class RoleManagementComponent extends Component
     public function mount()
     {
         $this->role=new Role();
+        $this->allPermissions=Permission::all();
     }
 
     public function createOrEdit($id=null)
@@ -28,9 +32,11 @@ class RoleManagementComponent extends Component
         if($id)
         {
             $this->role=Role::find($id);
+            $this->selectedPermissions=$this->role->permissions->pluck('id');
         }
         else{
             $this->role=new Role();
+            $this->selectedPermissions=[];
         }
         $this->editableMode=true;
     }
@@ -44,6 +50,7 @@ class RoleManagementComponent extends Component
     {
         $this->validate();
         $this->role->save();
+        $this->role->syncPermissions($this->selectedPermissions);
         $this->editableMode=false;
         $this->dispatchBrowserEvent('success-notification',['message'=>'Role saved successfully.']);
     }
