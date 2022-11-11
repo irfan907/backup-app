@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PageController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -26,7 +27,11 @@ Route::get('/dashboard', function () {
 Route::middleware('auth')->group(function () {
 
     Route::controller(UserController::class)->group(function () {
-        Route::get('/users', 'index')->name('users.index');
+        Route::get('/users', 'index')->name('administration.users.index');
+    });
+
+    Route::controller(PageController::class)->group(function () {
+        Route::get('/role-management', 'roleManagement')->name('administration.roles.index');
     });
 
 });
