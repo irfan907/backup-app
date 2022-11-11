@@ -3,6 +3,7 @@
 namespace App\Http\Livewire;
 
 use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -12,13 +13,14 @@ class UserManagementComponent extends Component
     protected $paginationTheme = 'bootstrap';
 
     public User $user;
+    public $password;
     public $editableMode=false;
+    public bool $isNewUser=false;
 
     protected $rules=[
         'user.name'=>'required',
         'user.email'=>'required',
-        'user.password'=>'nullable',
-        
+        'password'=>'nullable',
         ];
 
     public function mount()
@@ -31,9 +33,11 @@ class UserManagementComponent extends Component
         if($id)
         {
             $this->user=User::find($id);
+            $this->isNewUser=false;
         }
         else{
             $this->user=new User();
+            $this->isNewUser=true;
         }
         $this->editableMode=true;
     }
@@ -46,7 +50,12 @@ class UserManagementComponent extends Component
     public function save()
     {
         $this->validate();
-        $this->user->save();
+        if($this->isNewUser){
+            $this->user->password=Hash::make($this->password);
+            $this->user->save();
+        }else{
+            $this->user->save();
+        }
         $this->editableMode=false;
         $this->dispatchBrowserEvent('success-notification',['message'=>'User saved successfully.']);
     }

@@ -1,6 +1,6 @@
 <div class="card card-custom gutter-b example example-compact">
-    <div class="card-body pt-1">
-        <div style="min-height: 20px;"><span class="text-sm text-info" wire:loading><i class="fas fa-spinner fa-spin text-info"></i> Loading..</span></div>
+    <x-full-page-loader wire:loading.delay />
+    <div class="card-body pt-3">
         @if($editableMode)
             <form wire:submit.prevent="save">
                 <h2 class="text-capitalize">user Details</h2>
@@ -20,13 +20,15 @@
                             <small class="text-danger">{{ $message }}</small>
                         @enderror
                     </div>
+                    @if($isNewUser)
                     <div class="form-group col-md-12">
                         <label>password</label>
-                        <input wire:model.defer="user.password" type="text" class="form-control @error('user.password') border border-danger @enderror">
-                        @error('user.password')
+                        <input wire:model.defer="password" type="text" class="form-control @error('password') border border-danger @enderror">
+                        @error('password')
                             <small class="text-danger">{{ $message }}</small>
                         @enderror
                     </div>
+                    @endif
 
 
                     <div class="form-group col-md-12 mt-2">

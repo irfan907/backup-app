@@ -1,6 +1,6 @@
 <div class="card card-custom gutter-b example example-compact">
-    <div class="card-body pt-1">
-        <div style="min-height: 20px;"><span class="text-sm text-info" wire:loading><i class="fas fa-spinner fa-spin text-info"></i> Loading..</span></div>
+    <div class="card-body pt-3">
+        <x-full-page-loader wire:loading.delay />
         @if($editableMode)
             <form wire:submit.prevent="save">
                 <h2 class="text-capitalize">{{objectName}} Details</h2>
