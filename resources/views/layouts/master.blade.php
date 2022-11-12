@@ -82,8 +82,18 @@
         </a>
       </li>
 
+      <li class="nav-item  {{ (Str::contains(Route::currentRouteName(), 'dashboard')) ? 'active':''}} ">
+        <a href="{{route('dashboard')}}" class="nav-link">
+          <span class="sidebar-icon">
+            <i class="fas fa-user"></i>
+          </span> 
+          <span class="sidebar-text">Dashboard</span>
+        </a>
+      </li>
+
         @foreach($sideMenu as $menuKey => $menu)
             @if (Arr::exists($menu, 'sub_menu'))
+                @canany($menu['permissions'])
                 <li class="nav-item">
                     <span
                       class="nav-link  d-flex justify-content-between align-items-center {{ (Str::contains(Route::currentRouteName(), $menuKey)) ? '':'collapsed'}}"
@@ -103,17 +113,21 @@
                       <ul class="flex-column nav">
                         @foreach($menu['sub_menu'] as $subMenuKey => $subMenu)
                             <!-- Permission Check -->
+                            @canany($subMenu['permissions'])
                             <li class="nav-item {{ (Str::contains(Route::currentRouteName(), $subMenuKey)) ? 'active':''}}">
                                 <a class="nav-link" href="{{route($subMenu['route_name'])}}">
                                   <span class="sidebar-text">{{$subMenu['title']}}</span>
                                 </a>
                             </li>
+                            @endcanany
                         @endforeach  
                       </ul>
                     </div>
                 </li>
+                @endcanany
             @else
                 <!-- Permission Check -->
+                @canany($menu['permissions'])
                 <li class="nav-item  {{ (Str::contains(Route::currentRouteName(), $menuKey)) ? 'active':''}} ">
                     <a href="{{route($menu['route_name'])}}" class="nav-link">
                       <span class="sidebar-icon">
@@ -122,6 +136,7 @@
                       <span class="sidebar-text">{{$menu['title']}}</span>
                     </a>
                   </li>
+                @endcanany
             @endif
         @endforeach
       

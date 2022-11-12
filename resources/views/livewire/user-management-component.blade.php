@@ -20,7 +20,21 @@
                             <small class="text-danger">{{ $message }}</small>
                         @enderror
                     </div>
+
+                    @if($isNewUser)
                     <div class="form-group col-md-12">
+                        <label>Password</label>
+                        <input wire:model.defer="password" type="text" class="form-control @error('password') border border-danger @enderror">
+                        @error('password')
+                            <small class="text-danger">{{ $message }}</small>
+                        @enderror
+                    </div>
+                    @endif
+
+                    <div class="form-group col-md-12">
+                        <div class="bg-danger my-3 px-3 rounded text-danger text-white">
+                            Carefully Assign <b class="bg-white px-2 rounded text-danger">SuperAdmin</b> Role. It will have all the permissions in the system.
+                        </div>
                         <label>Role</label>
                         <select wire:model.defer="selectedRole" type="text" class="form-control form-select @error('selectedRole') border border-danger @enderror">
                             <option value="">Select Role</option>
@@ -32,16 +46,6 @@
                             <small class="text-danger">{{ $message }}</small>
                         @enderror
                     </div>
-                    @if($isNewUser)
-                    <div class="form-group col-md-12">
-                        <label>Password</label>
-                        <input wire:model.defer="password" type="text" class="form-control @error('password') border border-danger @enderror">
-                        @error('password')
-                            <small class="text-danger">{{ $message }}</small>
-                        @enderror
-                    </div>
-                    @endif
-
 
                     <div class="form-group col-md-12 mt-2">
                         <button type="submit" class="btn btn-tertiary font-weight-bolder btn-sm">Save</button>
@@ -53,7 +57,9 @@
         @else
         <div class="d-flex justify-content-between align-items-center">
             <h2 class="text-capitalize">users</h2>
+            @can('users-add')
             <a href="" wire:click.prevent="createOrEdit" class="btn btn-tertiary font-weight-bolder btn-sm my-2 text-capitalize">Add New user</a>
+            @endcan
         </div>
 
         <div class="table-responsive">
@@ -72,11 +78,15 @@
                         <td>{{ $user->id }}</td>
                         <td>{{ $user->name }}</td>
                         <td>{{ $user->email }}</td> 
-                        <td>{{ implode($user->getRoleNames()->toArray(),'') }}</td> 
+                        <td><span class="badge bg-success">{{ implode($user->getRoleNames()->toArray(),'') }}</span></td> 
                         <td>{{ $user->created_at->format('d-M-Y h:i a') }}</td>
                         <td>
+                            @can('users-edit')
                             <button wire:click.prevent="createOrEdit({{ $user->id }})" class="btn btn-sm btn-info">Edit</button>
+                            @endcan
+                            @can('users-delete')
                             <button wire:click.prevent="$emit('confirmDelete',{{ $user->id }})" class="btn btn-sm btn-danger">Delete</button>
+                            @endcan
                         </td>
                     </tr>
                     @empty

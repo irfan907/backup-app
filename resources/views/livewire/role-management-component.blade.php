@@ -6,7 +6,6 @@
                 <form wire:submit.prevent="save">
                     <h2 class="text-capitalize">role Details</h2>
                     <div class="row gutters-0 mt-3">
-
                         <div class="form-group col-md-12">
                             <label>Name</label>
                             <input wire:model.defer="role.name" type="text" class="form-control @error('role.name') is-invalid @enderror">
@@ -18,14 +17,21 @@
 
                         <div class="col-md-12 my-5">
                             <h4>Permissions</h4>
-                            @foreach($allPermissions as $permission)
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" wire:model.defer="selectedPermissions" value="{{ $permission->id }}" id="check-p-{{ $permission->id }}">
-                                <label class="form-check-label" for="check-p-{{ $permission->id }}">
-                                    {{ $permission->name }}
-                                </label>
+                            @if($role->name =='SuperAdmin')
+                            <div class="bg-danger my-3 px-3 rounded text-danger text-white">
+                                Note: <b class="bg-white px-2 rounded text-danger">SuperAdmin</b> Role have all the permissions in the system.
                             </div>
-                            @endforeach
+                            @else
+                                @foreach($allPermissions as $permission)
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" wire:model.defer="selectedPermissions" value="{{ $permission->id }}" id="check-p-{{ $permission->id }}">
+                                    <label class="form-check-label" for="check-p-{{ $permission->id }}">
+                                        {{ $permission->name }}
+                                    </label>
+                                </div>
+                                @endforeach
+                            @endif
+                            
                         </div>
 
 
@@ -39,7 +45,9 @@
             @else
                 <div class="d-flex justify-content-between align-items-center">
                     <h2 class="text-capitalize">roles</h2>
+                    @can('roles-add')
                     <a href="" wire:click.prevent="createOrEdit" class="btn btn-tertiary font-weight-bolder btn-sm my-2 text-capitalize">Add New role</a>
+                    @endcan
                 </div>
 
                 <div class="table-responsive">
@@ -57,8 +65,14 @@
                                 <td>{{ $role->name }}</td>
                                 <td>{{ $role->created_at->format('d-M-Y h:i a') }}</td>
                                 <td>
-                                    <button wire:click.prevent="createOrEdit({{ $role->id }})" class="btn btn-sm btn-info">Edit</button>
-                                    <button wire:click.prevent="$emit('confirmDelete',{{ $role->id }})" class="btn btn-sm btn-danger">Delete</button>
+                                    @if($role->name != 'SuperAdmin')
+                                        @can('roles-edit')
+                                        <button wire:click.prevent="createOrEdit({{ $role->id }})" class="btn btn-sm btn-info">Edit</button>
+                                        @endcan
+                                        @can('roles-delete')
+                                        <button wire:click.prevent="$emit('confirmDelete',{{ $role->id }})" class="btn btn-sm btn-danger">Delete</button>
+                                        @endcan
+                                    @endif
                                 </td>
                             </tr>
                             @empty

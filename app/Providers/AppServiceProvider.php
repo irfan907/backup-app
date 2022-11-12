@@ -26,24 +26,25 @@ class AppServiceProvider extends ServiceProvider
         view()->composer(['layouts.master'], function ($view) {
 
             $sideMenu=[
-                'dashboard' => [
-                            'icon' => 'fas fa-users',
-                            'route_name' => 'dashboard',
-                            'permission' => 'auth',
-                            'title' => 'Dashboard'
-                        ],
+                // 'dashboard' => [
+                //             'icon' => 'fas fa-users',
+                //             'route_name' => 'dashboard',
+                //             'permissions' => [],
+                //             'title' => 'Dashboard'
+                //         ],
                 'administration' => [
                             'icon' => 'fas fa-users',
                             'title' => 'Administration',
+                            'permissions' => ['users-view','roles-view'],
                             'sub_menu' => [
                                 'users' => [
                                     'route_name' => 'administration.users.index',
-                                    'permission' => 'admin',
+                                    'permissions' => ['users-view'],
                                     'title' => 'User Management'
                                 ],
                                 'roles' => [
                                     'route_name' => 'administration.roles.index',
-                                    'permission' => 'admin',
+                                    'permissions' => ['roles-view'],
                                     'title' => 'Role Management'
                                 ],
                             ] 

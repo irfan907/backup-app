@@ -2,9 +2,11 @@
 
 namespace Database\Seeders;
 
+use App\Models\User;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
 
 class PermissionSeeder extends Seeder
 {
@@ -15,9 +17,7 @@ class PermissionSeeder extends Seeder
      */
     public function run()
     {
-        DB::statement("SET foreign_key_checks=0");
-        Permission::truncate();
-        DB::statement("SET foreign_key_checks=1");
+        Permission::destroy(Permission::pluck('id'));
         
         Permission::create(['name' => 'users-view']);
         Permission::create(['name' => 'users-add']);
@@ -28,5 +28,16 @@ class PermissionSeeder extends Seeder
         Permission::create(['name' => 'roles-add']);
         Permission::create(['name' => 'roles-edit']);
         Permission::create(['name' => 'roles-delete']);
+
+        $super_admin=Role::updateOrCreate(['name'=>'SuperAdmin']);
+
+        $user=User::updateOrCreate(
+            ['email'=>'superadmin@gmail.com'],
+            [
+            'name'=>'Super Admin',
+            'password'=>Hash::make('admin')
+            ]);
+
+        $user->syncRoles($super_admin);
     }
 }
