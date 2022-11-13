@@ -1,36 +1,52 @@
-<x-guest-layout>
-    <x-auth-card>
-        <x-slot name="logo">
-            <a href="/">
-                <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
-            </a>
-        </x-slot>
 
-        <div class="mb-4 text-sm text-gray-600">
-            {{ __('Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.') }}
+@extends('layouts.guest')
+@section('title','Forgot Password')
+@section('content')
+<section class="vh-lg-100 mt-5 mt-lg-0 bg-soft d-flex align-items-center">
+    <div class="container">
+        <div class="row justify-content-center form-bg-image">
+            <p class="text-center"><a href="{{ route('login') }}" class="d-flex align-items-center justify-content-center">
+                <svg class="icon icon-xs me-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.707 14.707a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l2.293 2.293a1 1 0 010 1.414z" clip-rule="evenodd"></path></svg>
+                Back to log in
+                </a>
+            </p>
+            <div class="col-12 d-flex align-items-center justify-content-center">
+                <div class="signin-inner my-3 my-lg-0 bg-white shadow border-0 rounded p-4 p-lg-5 w-100 fmxw-500">
+                    <!-- Session Status -->
+                    @if (session('status'))
+                    <div class="alert alert-success">
+                        {{ session('status') }}
+                    </div>
+                    @endif
+                    <!-- Validation Errors -->
+                    @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                        @foreach ($errors->all() as $error)
+                            <li> {{ $error }}</li>
+                        @endforeach
+                        </ul>
+                    </div>
+                    @endif
+                    <h1 class="h3">Forgot your password?</h1>
+                    <p class="mb-4">Don't fret! Just type in your email and we will send you a link to reset your password!</p>
+                    <form method="POST" action="{{ route('password.email') }}">
+                        @csrf
+                        <!-- Form -->
+                        <div class="mb-4">
+                            <label for="email">Your Email</label>
+                            <div class="input-group">
+                                <input type="email" class="form-control" id="email" placeholder="john@company.com" name="email" value="{{ old('email') }}" required autofocus>
+                            </div>  
+                        </div>
+                        <!-- End of Form -->
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-gray-800">Recover password</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
-
-        <!-- Session Status -->
-        <x-auth-session-status class="mb-4" :status="session('status')" />
-
-        <!-- Validation Errors -->
-        <x-auth-validation-errors class="mb-4" :errors="$errors" />
-
-        <form method="POST" action="{{ route('password.email') }}">
-            @csrf
-
-            <!-- Email Address -->
-            <div>
-                <x-label for="email" :value="__('Email')" />
-
-                <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus />
-            </div>
-
-            <div class="flex items-center justify-end mt-4">
-                <x-button>
-                    {{ __('Email Password Reset Link') }}
-                </x-button>
-            </div>
-        </form>
-    </x-auth-card>
-</x-guest-layout>
+    </div>
+</section>
+@endsection

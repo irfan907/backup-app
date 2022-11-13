@@ -23,7 +23,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        view()->composer(['layouts.master'], function ($view) {
+        view()->composer(['layouts.app'], function ($view) {
 
             $sideMenu=[
                 // 'dashboard' => [

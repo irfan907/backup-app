@@ -25,13 +25,10 @@ Route::get('/dashboard', function () {
 })->middleware(['auth'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
-
-    Route::controller(UserController::class)->group(function () {
-        Route::get('/users', 'index')->name('administration.users.index');
-    });
-
+    
     Route::controller(PageController::class)->group(function () {
-        Route::get('/role-management', 'roleManagement')->name('administration.roles.index');
+        Route::get('/users', 'userManagement')->name('administration.users.index')->middleware(['password.confirm']);
+        Route::get('/role-management', 'roleManagement')->name('administration.roles.index')->middleware('password.confirm');;
     });
 
 });

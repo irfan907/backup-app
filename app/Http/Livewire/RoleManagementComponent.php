@@ -6,10 +6,11 @@ use Spatie\Permission\Models\Role;
 use Livewire\Component;
 use Livewire\WithPagination;
 use Spatie\Permission\Models\Permission;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 class RoleManagementComponent extends Component
 {
-    use WithPagination;
+    use WithPagination,AuthorizesRequests;
     protected $paginationTheme = 'bootstrap';
 
     public Role $role;

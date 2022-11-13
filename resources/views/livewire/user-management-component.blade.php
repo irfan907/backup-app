@@ -78,7 +78,11 @@
                         <td>{{ $user->id }}</td>
                         <td>{{ $user->name }}</td>
                         <td>{{ $user->email }}</td> 
-                        <td><span class="badge bg-success">{{ implode($user->getRoleNames()->toArray(),'') }}</span></td> 
+                        <td>
+                            @foreach($user->getRoleNames() as $role)
+                            <span class="badge bg-success">{{ $role }}</span>
+                            @endforeach
+                        </td> 
                         <td>{{ $user->created_at->format('d-M-Y h:i a') }}</td>
                         <td>
                             @can('users-edit')
