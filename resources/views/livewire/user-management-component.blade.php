@@ -39,7 +39,7 @@
                         <select wire:model.defer="selectedRole" type="text" class="form-control form-select @error('selectedRole') border border-danger @enderror">
                             <option value="">Select Role</option>
                             @foreach($allRoles as $role)
-                            <option value="{{ $role->name }}">{{ $role->name }}</option>
+                            <option value="{{ $role->name }}" title="Cannot Assign Superadmin" class="{{ $role->name =='SuperAdmin' ? 'bg-danger text-white':''; }}" {{ $role->name =='SuperAdmin' ? 'disabled':''; }}  >{{ $role->name }}</option>
                             @endforeach
                         </select>
                         @error('selectedRole')

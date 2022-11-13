@@ -7,10 +7,11 @@ use Illuminate\Support\Facades\Hash;
 use Livewire\Component;
 use Livewire\WithPagination;
 use Spatie\Permission\Models\Role;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 class UserManagementComponent extends Component
 {
-    use WithPagination;
+    use WithPagination,AuthorizesRequests;
     protected $paginationTheme = 'bootstrap';
 
     public User $user;
@@ -57,9 +58,11 @@ class UserManagementComponent extends Component
     {
         $this->validate();
         if($this->isNewUser){
+            $this->authorize('users-add');
             $this->user->password=Hash::make($this->password);
             $this->user->save();
         }else{
+            $this->authorize('users-edit');
             $this->user->save();
         }
         $this->user->syncRoles($this->selectedRole);
@@ -69,6 +72,7 @@ class UserManagementComponent extends Component
 
     public function delete($id)
     {
+        $this->authorize('users-delete');
         User::destroy($id);
         $this->dispatchBrowserEvent('success-notification',['message'=>'User deleted successfully.']);
     }

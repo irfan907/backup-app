@@ -58,6 +58,7 @@ class RoleManagementComponent extends Component
 
     public function delete($id)
     {
+        $this->authorize('roles-delete');
         Role::destroy($id);
         $this->dispatchBrowserEvent('success-notification',['message'=>'Role deleted successfully.']);
     }
