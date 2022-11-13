@@ -9,11 +9,11 @@
 <meta name="title" content="Volt - Free Bootstrap 5 Dashboard">
 
 <!-- Favicon -->
-<link rel="apple-touch-icon" sizes="120x120" href="volt/assets/img/favicon/apple-touch-icon.png">
-<link rel="icon" type="image/png" sizes="32x32" href="volt/assets/img/favicon/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="volt/assets/img/favicon/favicon-16x16.png">
-<link rel="manifest" href="volt/assets/img/favicon/site.webmanifest">
-<link rel="mask-icon" href="volt/assets/img/favicon/safari-pinned-tab.svg" color="#ffffff">
+<link rel="apple-touch-icon" sizes="120x120" href="{{ asset('volt/assets/img/favicon/apple-touch-icon.png') }}">
+<link rel="icon" type="image/png" sizes="32x32" href="{{ asset('volt/assets/img/favicon/favicon-32x32.png') }}">
+<link rel="icon" type="image/png" sizes="16x16" href="{{ asset('volt/assets/img/favicon/favicon-16x16.png') }}">
+<link rel="manifest" href="{{ asset('volt/assets/img/favicon/site.webmanifest') }}">
+<link rel="mask-icon" href="{{ asset('volt/assets/img/favicon/safari-pinned-tab.svg') }}" color="#ffffff">
 <meta name="msapplication-TileColor" content="#ffffff">
 <meta name="theme-color" content="#ffffff">
 
@@ -53,7 +53,7 @@
     <div class="user-card d-flex d-md-none align-items-center justify-content-between justify-content-md-center pb-4">
       <div class="d-flex align-items-center">
         <div class="avatar-lg me-4">
-          <img src="volt/assets/img/team/profile-picture-3.jpg" class="card-img-top rounded-circle border-white"
+          <img src="{{ asset('volt/assets/img/team/profile-picture-3.jpg') }}" class="card-img-top rounded-circle border-white"
             alt="Bonnie Green">
         </div>
         <div class="d-block">
@@ -76,7 +76,7 @@
       <li class="nav-item">
         <a href="{{ route('dashboard') }}" class="nav-link d-flex align-items-center">
           <span class="sidebar-icon">
-            <img src="volt/assets/img/brand/light.svg" height="20" width="20" alt="Volt Logo">
+            <img src="{{ asset('volt/assets/img/brand/light.svg') }}" height="20" width="20" alt="Volt Logo">
           </span>
           <span class="mt-1 ms-1 sidebar-text">Volt Overview</span>
         </a>
@@ -376,10 +376,10 @@
             <div class="d-flex justify-content-center">
                 <a class="me-3" href="https://themesberg.com/product/admin-dashboard/volt-bootstrap-5-dashboard"
                     target="_blank">
-                    <img src="volt/assets/img/technologies/bootstrap-5-logo.svg" class="image image-xs">
+                    <img src="{{ asset('volt/assets/img/technologies/bootstrap-5-logo.svg') }}" class="image image-xs">
                 </a>
                 <a href="https://demo.themesberg.com/volt-react-dashboard/#/" target="_blank">
-                    <img src="volt/assets/img/technologies/react-logo.svg" class="image image-xs">
+                    <img src="{{ asset('volt/assets/img/technologies/react-logo.svg') }}" class="image image-xs">
                 </a>
             </div>
         </div>
@@ -414,45 +414,45 @@
 <script src="https://code.jquery.com/jquery-3.6.1.slim.min.js" integrity="sha256-w8CvhFs7iHNVUtnSP0YKEg00p9Ih13rlL9zGqvLdePA=" crossorigin="anonymous"></script>
 
     <!-- Core -->
-<script src="volt/vendor/@popperjs/core/dist/umd/popper.min.js"></script>
-<script src="volt/vendor/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="{{ asset('volt/vendor/@popperjs/core/dist/umd/popper.min.js') }}"></script>
+<script src="{{ asset('volt/vendor/bootstrap/dist/js/bootstrap.min.js') }}"></script>
 
 <!-- Vendor JS -->
-<script src="volt/vendor/onscreen/dist/on-screen.umd.min.js"></script>
+<script src="{{ asset('volt/vendor/onscreen/dist/on-screen.umd.min.js') }}"></script>
 
 <!-- Slider -->
 <script src="{{ asset('volt/vendor/nouislider/distribute/nouislider.min.js') }}"></script>
 
 <!-- Smooth scroll -->
-<script src="volt/vendor/smooth-scroll/dist/smooth-scroll.polyfills.min.js"></script>
+<script src="{{ asset('volt/vendor/smooth-scroll/dist/smooth-scroll.polyfills.min.js') }}"></script>
 
 <!-- Charts -->
-<script src="volt/vendor/chartist/dist/chartist.min.js"></script>
-<script src="volt/vendor/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.min.js"></script>
+<script src="{{ asset('volt/vendor/chartist/dist/chartist.min.js') }}"></script>
+<script src="{{ asset('volt/vendor/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.min.js') }}"></script>
 
 <!-- Datepicker -->
-<script src="volt/vendor/vanillajs-datepicker/dist/js/datepicker.min.js"></script>
+<script src="{{ asset('volt/vendor/vanillajs-datepicker/dist/js/datepicker.min.js') }}"></script>
 
 <!-- Sweet Alerts 2 -->
-<script src="volt/vendor/sweetalert2/dist/sweetalert2.all.min.js"></script>
+<script src="{{ asset('volt/vendor/sweetalert2/dist/sweetalert2.all.min.js') }}"></script>
 
 <!-- Moment JS -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"></script>
 
 <!-- Vanilla JS Datepicker -->
-<script src="volt/vendor/vanillajs-datepicker/dist/js/datepicker.min.js"></script>
+<script src="{{ asset('volt/vendor/vanillajs-datepicker/dist/js/datepicker.min.js') }}"></script>
 
 <!-- Notyf -->
-<script src="volt/vendor/notyf/notyf.min.js"></script>
+<script src="{{ asset('volt/vendor/notyf/notyf.min.js') }}"></script>
 
 <!-- Simplebar -->
-<script src="volt/vendor/simplebar/dist/simplebar.min.js"></script>
+<script src="{{ asset('volt/vendor/simplebar/dist/simplebar.min.js') }}"></script>
 
 <!-- Github buttons -->
 <script async defer src="https://buttons.github.io/buttons.js"></script>
 
 <!-- Volt JS -->
-<script src="volt/assets/js/volt.js"></script>
+<script src="{{ asset('volt/assets/js/volt.js') }}"></script>
 <script>
     $('.logout-button').on('click',function(e){
         e.preventDefault();
