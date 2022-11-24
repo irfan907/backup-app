@@ -1,4 +1,14 @@
 {
     "/js/app.js": "/js/app.js",
-    "/css/app.css": "/css/app.css"
+    "/workers/db.js": "/workers/db.js",
+    "/workers/audio.js": "/workers/audio.js",
+    "/assets/vendor/MediaManager/style.css": "/assets/vendor/MediaManager/style.css",
+    "/css/app.css": "/css/app.css",
+    "/assets/vendor/MediaManager/lottie/avalanche.json": "/assets/vendor/MediaManager/lottie/avalanche.json",
+    "/assets/vendor/MediaManager/lottie/ice_cream.json": "/assets/vendor/MediaManager/lottie/ice_cream.json",
+    "/assets/vendor/MediaManager/lottie/world.json": "/assets/vendor/MediaManager/lottie/world.json",
+    "/assets/vendor/MediaManager/lottie/zero.json": "/assets/vendor/MediaManager/lottie/zero.json",
+    "/assets/vendor/MediaManager/noPreview.jpg": "/assets/vendor/MediaManager/noPreview.jpg",
+    "/assets/vendor/MediaManager/patterns/gif/5b98026bab87a.gif": "/assets/vendor/MediaManager/patterns/gif/5b98026bab87a.gif",
+    "/assets/vendor/MediaManager/patterns/still/nyc-candy.png": "/assets/vendor/MediaManager/patterns/still/nyc-candy.png"
 }

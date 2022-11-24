@@ -34,3 +34,6 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__.'/auth.php';
+
+// MediaManager
+ctf0\MediaManager\MediaRoutes::routes();
