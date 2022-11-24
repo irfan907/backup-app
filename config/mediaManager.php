@@ -9,6 +9,7 @@ return [
     /*
      * filesystem disk
      */
+    //'storage_disk' => env('FILESYSTEM_DRIVER', 'public'),
     'storage_disk' => env('FILESYSTEM_DRIVER', 'public'),
 
     /*
