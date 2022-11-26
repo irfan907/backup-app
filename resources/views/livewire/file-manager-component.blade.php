@@ -31,8 +31,8 @@
                 <div>
                     <button type="button" class="btn btn-primary mr-2" data-bs-toggle="modal" data-bs-target="#modal-upload-files"><i class="fas fa-upload"></i>&nbsp; Upload</button>
                     <button type="button" class="btn btn-primary mr-2" wire:click.prevent="$emit('newDir')"><i class="fas fa-add"></i>&nbsp; New Folder</button>
-                    <button type="button" class="btn btn-primary mr-2" wire:click.prevent="copyFiles" {{ $selectedMode=='copy' || $selectedFiles==[] ? 'disabled':'' }}>Copy</button>
-                    <button type="button" class="btn btn-primary mr-2" wire:click.prevent="cutFiles" {{ $selectedMode=='cut' || $selectedFiles==[] ? 'disabled':'' }}>Cut</button>
+                    <button type="button" class="btn btn-primary mr-2" wire:click.prevent="copyFiles" {{ $selectedMode=='copy' ? 'disabled':'' }}>Copy</button>
+                    <button type="button" class="btn btn-primary mr-2" wire:click.prevent="cutFiles" {{ $selectedMode=='cut' ? 'disabled':'' }}>Cut</button>
                     <button type="button" class="btn btn-primary mr-2" wire:click.prevent="pasteFiles" {{ $selectedFiles==[] || !$selectedMode ? 'disabled':'' }}>Paste Here</button>
                     <button type="button" class="btn btn-secondary icon-btn mr-2" disabled=""><i class="fas fa-download"></i></button>
                     <div class="btn-group mr-2">
