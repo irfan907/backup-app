@@ -206,6 +206,7 @@
                     text: "You won't be able to revert this!",
                     icon: 'warning',
                     showCancelButton: true,
+                    showCancelButton: true,
                     confirmButtonColor: '#d33',
                     cancelButtonColor: '#3085d6',
                     confirmButtonText: 'Yes, delete it!'
@@ -222,6 +223,7 @@
                 var { value: newDir } =await Swal.fire({
                     title: 'Enter Folder Name',
                     input: 'text',
+                    showCancelButton: true,
                     inputPlaceholder: 'Enter New Name',
                     inputValidator: (value) => {
                         if (!value) {
@@ -267,6 +269,7 @@
                 var { value: newName } =await Swal.fire({
                     title: 'Rename File',
                     input: 'text',
+                    showCancelButton: true,
                     inputValue: oldName,
                     inputPlaceholder: 'Enter New Name',
                     inputValidator: (value) => {
