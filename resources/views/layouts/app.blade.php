@@ -76,18 +76,18 @@
     </div>
     <ul class="nav flex-column pt-3 pt-md-0">
       <li class="nav-item">
-        <a href="{{ route('dashboard') }}" class="nav-link d-flex align-items-center">
+        <a href="javascript::void(0)" class="nav-link d-flex align-items-center disabled">
           <span class="sidebar-icon">
             <img src="{{ asset('volt/assets/img/brand/light.svg') }}" height="20" width="20" alt="Volt Logo">
           </span>
-          <span class="mt-1 ms-1 sidebar-text">Volt Overview</span>
+          <span class="mt-1 ms-1 sidebar-text">Backup App</span>
         </a>
       </li>
 
       <li class="nav-item  {{ (Str::contains(Route::currentRouteName(), 'dashboard')) ? 'active':''}} ">
         <a href="{{route('dashboard')}}" class="nav-link">
           <span class="sidebar-icon">
-            <i class="fas fa-user"></i>
+            <i class="fas fa-dashboard"></i>
           </span> 
           <span class="sidebar-text">Dashboard</span>
         </a>
@@ -102,7 +102,7 @@
                       data-bs-toggle="collapse" data-bs-target="#submenu-app" aria-expanded="{{ (Str::contains(Route::currentRouteName(), $menuKey)) ? 'true':'false'}}">
                       <span>
                         <span class="sidebar-icon">
-                          <svg class="icon icon-xs me-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5 4a3 3 0 00-3 3v6a3 3 0 003 3h10a3 3 0 003-3V7a3 3 0 00-3-3H5zm-1 9v-1h5v2H5a1 1 0 01-1-1zm7 1h4a1 1 0 001-1v-1h-5v2zm0-4h5V8h-5v2zM9 8H4v2h5V8z" clip-rule="evenodd"></path></svg>
+                          <i class="{{$menu['icon']}}"></i>
                         </span> 
                         <span class="sidebar-text">{{$menu['title']}}</span>
                       </span>
@@ -149,10 +149,10 @@
           <span class="sidebar-icon">
             <i class="fa-sign-out-alt fas text-danger"></i>
           </span>
-          <span class="sidebar-text">Logout <span class="badge badge-sm bg-secondary ms-1 text-gray-800">v1.4</span></span>
+          <span class="sidebar-text">Logout <span class="badge badge-sm bg-secondary ms-1 text-gray-800 d-none">v1.4</span></span>
         </a>
       </li>
-      <li class="nav-item">
+      <li class="nav-item d-none">
         <a href="{{ asset('volt/index.html') }}"
           class="btn btn-secondary d-flex align-items-center justify-content-center btn-upgrade-pro">
           <span class="sidebar-icon d-inline-flex align-items-center justify-content-center">

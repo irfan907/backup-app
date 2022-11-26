@@ -33,13 +33,13 @@ class AppServiceProvider extends ServiceProvider
                 //             'title' => 'Dashboard'
                 //         ],
                 'file' => [
-                            'icon' => 'fas fa-files',
+                            'icon' => 'fas fa-toolbox',
                             'route_name' => 'file_management',
                             'permissions' => ['users-view'],
                             'title' => 'File Manager'
                         ],
                 'administration' => [
-                            'icon' => 'fas fa-users',
+                            'icon' => 'fas fa-users-gear',
                             'title' => 'Administration',
                             'permissions' => ['users-view','roles-view'],
                             'sub_menu' => [
