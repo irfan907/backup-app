@@ -6,7 +6,7 @@
         Selected: {{ json_encode($selectedFiles) }} <br>
         Files: {{ json_encode($files) }} <br>
     </div> -->
-    <div class="container flex-grow-1 light-style container-p-y">
+    <div class="container-fluid">
         <div class="container-m-nx container-m-ny bg-lightest mb-3">
            <div>
              <ol class="breadcrumb text-big container-p-x py-3 m-0">
@@ -59,68 +59,72 @@
             <hr class="m-0" />
         </div>
 
-        <div class="row gap-1">
+        <div class="row m-0 gy-2">
 
             @foreach($directories as $key=>$tdirectory)
             @php
                 $directory=str_contains($tdirectory, '/') ? substr($tdirectory, strrpos($tdirectory, '/') + 1):$tdirectory;
             @endphp
-            <div class="bg-white col-2 py-1 searchable-parent" id="dir-{{ $key }}">
-                <div class="align-items-center d-flex justify-content-end">
-                    <div class="form-check d-none">
-                        <input class="form-check-input select-file-check" wire:model.defer="selectedFiles" type="checkbox" value="{{ $tdirectory }}" id="defaultCheck{{ $key }}">
-                        <label class="form-check-label" for="defaultCheck{{ $key }}"></label>
+            <div class="col-2 p-0 searchable-parent" id="dir-{{ $key }}">
+                <div class="bg-white p-2 m-1 h-100">
+                    <div class="align-items-center d-flex justify-content-end">
+                        <div class="form-check d-none">
+                            <input class="form-check-input select-file-check" wire:model.defer="selectedFiles" type="checkbox" value="{{ $tdirectory }}" id="defaultCheck{{ $key }}">
+                            <label class="form-check-label" for="defaultCheck{{ $key }}"></label>
+                        </div>
+                        <div>
+                            <div class="dropdown">
+                                <button class="btn btn-sm dropdown-toggle" type="button" id="dir-dropdown{{ $key }}" data-bs-toggle="dropdown" aria-expanded="false">
+                                  <i class="fa-solid fa-ellipsis-vertical"></i>
+                                </button>
+                                <ul class="dropdown-menu" aria-labelledby="dir-dropdown{{ $key }}">
+                                    <!-- <li><a class="dropdown-item" href="#">Copy</a></li>
+                                    <li><a class="dropdown-item" href="#">Cut</a></li> -->
+                                    <!-- <li><a class="dropdown-item" wire:click.prevent="$emit('renameDir','{{ $directory }}')">Rename</a></li> -->
+                                  <li><a class="dropdown-item text-danger" wire:click.prevent="$emit('confirmDeleteDir','{{ $directory }}')">Delete</a></li>
+                                </ul>
+                              </div>
+                        </div>
                     </div>
-                    <div>
-                        <div class="dropdown">
-                            <button class="btn btn-sm dropdown-toggle" type="button" id="dir-dropdown{{ $key }}" data-bs-toggle="dropdown" aria-expanded="false">
-                              <i class="fa-solid fa-ellipsis-vertical"></i>
-                            </button>
-                            <ul class="dropdown-menu" aria-labelledby="dir-dropdown{{ $key }}">
-                                <!-- <li><a class="dropdown-item" href="#">Copy</a></li>
-                                <li><a class="dropdown-item" href="#">Cut</a></li> -->
-                                <!-- <li><a class="dropdown-item" wire:click.prevent="$emit('renameDir','{{ $directory }}')">Rename</a></li> -->
-                              <li><a class="dropdown-item text-danger" wire:click.prevent="$emit('confirmDeleteDir','{{ $directory }}')">Delete</a></li>
-                            </ul>
-                          </div>
-                    </div>
+                    <a wire:click.prevent="setCurrentDir('{{ ($currentDir ? $currentDir.'/':'').$directory }}')">
+                        <div class="align-items-center d-flex flex-column justify-content-center">
+                            <i class="far fa-folder text-secondary fa-3x"></i>
+                            <p class="mb-0 mt-2 searchable-text">{{ $directory }}</p>
+                        </div>
+                    </a>
                 </div>
-                <a wire:click.prevent="setCurrentDir('{{ ($currentDir ? $currentDir.'/':'').$directory }}')">
-                    <div class="align-items-center d-flex flex-column justify-content-center">
-                        <i class="far fa-folder text-secondary fa-3x"></i>
-                        <p class="mb-0 mt-2 searchable-text">{{ $directory }}</p>
-                    </div>
-                </a>
             </div>
             @endforeach
             @foreach($files as $key=>$tfile)
             @php
                 $file=str_contains($tfile, '/') ? substr($tfile, strrpos($tfile, '/') + 1):$tfile;
             @endphp
-            <div class="bg-white col-2 py-1 searchable-parent" id="fl-{{ $key }}">
-                <div class="align-items-center d-flex justify-content-between">
-                    <div class="form-check">
-                        <input class="form-check-input select-file-check" wire:model.defer="selectedFiles" type="checkbox" value="{{ $tfile }}" id="file-check{{ $key }}">
-                        <label class="form-check-label" for="file-check{{ $key }}"></label>
-                    </div>
-                    <div>
-                        <div class="dropdown">
-                            <button class="btn btn-sm dropdown-toggle" type="button" id="file-dropdown{{ $key }}" data-bs-toggle="dropdown" aria-expanded="false">
-                              <i class="fa-solid fa-ellipsis-vertical"></i>
-                            </button>
-                            <ul class="dropdown-menu" aria-labelledby="file-dropdown{{ $key }}">
-                                <!-- <li><a class="dropdown-item" href="#">Copy</a></li>
-                                <li><a class="dropdown-item" href="#">Cut</a></li> -->
-                                <li><a class="dropdown-item" wire:click.prevent="$emit('renameFile','{{ $file }}')">Rename</a></li>
-                              <li><a class="dropdown-item text-danger" wire:click.prevent="$emit('confirmDeleteFile','{{ $file }}')">Delete</a></li>
-                            </ul>
+            <div class="col-2 p-0 searchable-parent" id="fl-{{ $key }}">
+                <div class="bg-white p-2 m-1 h-100">
+                    <div class="align-items-center d-flex justify-content-between">
+                        <div class="form-check">
+                            <input class="form-check-input select-file-check" wire:model.defer="selectedFiles" type="checkbox" value="{{ $tfile }}" id="file-check{{ $key }}">
+                            <label class="form-check-label" for="file-check{{ $key }}"></label>
+                        </div>
+                        <div>
+                            <div class="dropdown">
+                                <button class="btn btn-sm dropdown-toggle" type="button" id="file-dropdown{{ $key }}" data-bs-toggle="dropdown" aria-expanded="false">
+                                  <i class="fa-solid fa-ellipsis-vertical"></i>
+                                </button>
+                                <ul class="dropdown-menu" aria-labelledby="file-dropdown{{ $key }}">
+                                    <!-- <li><a class="dropdown-item" href="#">Copy</a></li>
+                                    <li><a class="dropdown-item" href="#">Cut</a></li> -->
+                                    <li><a class="dropdown-item" wire:click.prevent="$emit('renameFile','{{ $file }}')">Rename</a></li>
+                                  <li><a class="dropdown-item text-danger" wire:click.prevent="$emit('confirmDeleteFile','{{ $file }}')">Delete</a></li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div >
-                    <div class="align-items-center d-flex flex-column justify-content-center">
-                        <i class="far fa-file-alt text-muted fa-3x"></i>
-                        <p class="mb-0 mt-2 text-center searchable-text" style="font-size: 0.8em;">{{ $file }}</p>
+                    <div >
+                        <div class="align-items-center d-flex flex-column justify-content-center">
+                            <i class="far fa-file-alt text-muted fa-3x"></i>
+                            <p class="mb-0 mt-2 text-center searchable-text" style="font-size: 0.8em;">{{ $file }}</p>
+                        </div>
                     </div>
                 </div>
             </div>
