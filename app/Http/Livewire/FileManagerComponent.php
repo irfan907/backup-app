@@ -80,6 +80,18 @@ class FileManagerComponent extends Component
         $this->dispatchBrowserEvent('success-notification',['message'=>'File Deleted '.$file]);
     }
 
+    public function deleteSelectedFiles()
+    {
+        try {
+        Storage::disk('s3')->delete($this->selectedFiles);  
+        } catch (\Exception $e) {
+            $this->dispatchBrowserEvent('error-prompt',['message'=>$e->getMessage()]);
+            return 1;
+        }
+        $this->getFiles();
+        $this->dispatchBrowserEvent('success-notification',['message'=>'Selected Files Deleted ']);
+    }
+
     public function rename($oldName,$newName)
     {
         try {

@@ -31,9 +31,10 @@
                 <div>
                     <button type="button" class="btn btn-primary mr-2" data-bs-toggle="modal" data-bs-target="#modal-upload-files"><i class="fas fa-upload"></i>&nbsp; Upload</button>
                     <button type="button" class="btn btn-primary mr-2" wire:click.prevent="$emit('newDir')"><i class="fas fa-add"></i>&nbsp; New Folder</button>
-                    <button type="button" class="btn btn-primary mr-2" wire:click.prevent="copyFiles" {{ $selectedMode=='copy' ? 'disabled':'' }}>Copy</button>
-                    <button type="button" class="btn btn-primary mr-2" wire:click.prevent="cutFiles" {{ $selectedMode=='cut' ? 'disabled':'' }}>Cut</button>
+                    <button type="button" class="btn btn-primary mr-2" wire:click.prevent="copyFiles" {{ $selectedMode=='copy' || $selectedFiles==[] ? 'disabled':'' }} id="copy-selected-btn">Copy</button>
+                    <button type="button" class="btn btn-primary mr-2" wire:click.prevent="cutFiles" {{ $selectedMode=='cut' || $selectedFiles==[] ? 'disabled':'' }} id="cut-selected-btn">Cut</button>
                     <button type="button" class="btn btn-primary mr-2" wire:click.prevent="pasteFiles" {{ $selectedFiles==[] || !$selectedMode ? 'disabled':'' }}>Paste Here</button>
+                    <button type="button" class="btn btn-danger mr-2" wire:click.prevent="$emit('confirmDeleteSelected')" {{ $selectedFiles==[]  ? 'disabled':'' }} id="delete-selected-btn">Delete Selected</button>
                     <button type="button" class="btn btn-secondary icon-btn mr-2" disabled=""><i class="fas fa-download"></i></button>
                     <div class="btn-group mr-2">
                         <button type="button" disabled class="btn btn-default md-btn-flat dropdown-toggle px-2" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-cog"></i></button>
@@ -67,7 +68,7 @@
             <div class="bg-white col-2 py-1 searchable-parent" id="dir-{{ $key }}">
                 <div class="align-items-center d-flex justify-content-end">
                     <div class="form-check d-none">
-                        <input class="form-check-input" wire:model.defer="selectedFiles" type="checkbox" value="{{ $tdirectory }}" id="defaultCheck{{ $key }}">
+                        <input class="form-check-input select-file-check" wire:model.defer="selectedFiles" type="checkbox" value="{{ $tdirectory }}" id="defaultCheck{{ $key }}">
                         <label class="form-check-label" for="defaultCheck{{ $key }}"></label>
                     </div>
                     <div>
@@ -99,7 +100,7 @@
             <div class="bg-white col-2 py-1 searchable-parent" id="fl-{{ $key }}">
                 <div class="align-items-center d-flex justify-content-between">
                     <div class="form-check">
-                        <input class="form-check-input" wire:model.defer="selectedFiles" type="checkbox" value="{{ $tfile }}" id="file-check{{ $key }}">
+                        <input class="form-check-input select-file-check" wire:model.defer="selectedFiles" type="checkbox" value="{{ $tfile }}" id="file-check{{ $key }}">
                         <label class="form-check-label" for="file-check{{ $key }}"></label>
                     </div>
                     <div>
@@ -152,6 +153,7 @@
         document.addEventListener('DOMContentLoaded', function() {  
             
             $(document).ready(function(){
+
                 $("#search-current-folder-input").on("keyup", function(e) {
                     e.preventDefault();
                     var value = $(this).val().toLowerCase();
@@ -159,6 +161,20 @@
                         $(this).parents('.searchable-parent').toggle($(this).text().toLowerCase().indexOf(value) > -1)
                     });
                 });
+
+                $(document).on("change",".select-file-check",function(e) {
+                    if($('.select-file-check:checkbox:checked').length>0)
+                    {
+                        $('#delete-selected-btn').attr('disabled',false);
+                        $('#copy-selected-btn').attr('disabled',false);
+                        $('#cut-selected-btn').attr('disabled',false);
+                    }else{
+                        $('#delete-selected-btn').attr('disabled',true);
+                        $('#copy-selected-btn').attr('disabled',true);
+                        $('#cut-selected-btn').attr('disabled',true);
+                    }
+                });
+
               });
             
             @this.on('confirmDeleteDir', dir => {
@@ -265,6 +281,24 @@
                         text:"New and Old Name is Same",
                     })
                   }
+
+            });
+
+            @this.on('confirmDeleteSelected', file => {
+
+                Swal.fire({
+                    title: 'Are you sure?',
+                    text: "You won't be able to revert this!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#d33',
+                    cancelButtonColor: '#3085d6',
+                    confirmButtonText: 'Yes, delete All Selcted Files!'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        @this.call('deleteSelectedFiles')
+                    }
+                })
 
             });
 
