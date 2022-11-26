@@ -67,7 +67,7 @@
             <div class="bg-white col-2 py-1 searchable-parent" id="dir-{{ $key }}">
                 <div class="align-items-center d-flex justify-content-end">
                     <div class="form-check d-none">
-                        <input class="form-check-input" wire:model="selectedFiles" type="checkbox" value="{{ $tdirectory }}" id="defaultCheck{{ $key }}">
+                        <input class="form-check-input" wire:model.defer="selectedFiles" type="checkbox" value="{{ $tdirectory }}" id="defaultCheck{{ $key }}">
                         <label class="form-check-label" for="defaultCheck{{ $key }}"></label>
                     </div>
                     <div>
@@ -99,7 +99,7 @@
             <div class="bg-white col-2 py-1 searchable-parent" id="fl-{{ $key }}">
                 <div class="align-items-center d-flex justify-content-between">
                     <div class="form-check">
-                        <input class="form-check-input" wire:model="selectedFiles" type="checkbox" value="{{ $tfile }}" id="file-check{{ $key }}">
+                        <input class="form-check-input" wire:model.defer="selectedFiles" type="checkbox" value="{{ $tfile }}" id="file-check{{ $key }}">
                         <label class="form-check-label" for="file-check{{ $key }}"></label>
                     </div>
                     <div>
