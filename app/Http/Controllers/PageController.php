@@ -17,4 +17,9 @@ class PageController extends Controller
         $this->authorize('roles-view');
         return view('role-management.index');
     }
+
+    public function fileMangement()
+    {
+        return view('filemanager');
+    }
 }

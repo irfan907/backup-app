@@ -28,7 +28,8 @@ Route::middleware('auth')->group(function () {
     
     Route::controller(PageController::class)->group(function () {
         Route::get('/users', 'userManagement')->name('administration.users.index')->middleware(['password.confirm']);
-        Route::get('/role-management', 'roleManagement')->name('administration.roles.index')->middleware('password.confirm');;
+        Route::get('/role-management', 'roleManagement')->name('administration.roles.index')->middleware('password.confirm');
+        Route::get('/file-management', 'fileMangement')->name('file_management');
     });
 
 });

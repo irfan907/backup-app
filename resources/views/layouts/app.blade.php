@@ -27,6 +27,8 @@
 <link type="text/css" href="{{ asset('volt/css/volt.css') }}" rel="stylesheet">
 <!-- Font awesome -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<!-- Styles -->
+<link rel="stylesheet" href="{{ asset('css/styles.css') }}">        
 <!-- Alpine js -->
 <script defer src="https://unpkg.com/alpinejs@3.10.5/dist/cdn.min.js"></script>
 @stack('styles')
@@ -169,8 +171,9 @@
         <div class="container-fluid px-0">
             <div class="d-flex justify-content-between w-100" id="navbarSupportedContent">
             <div class="d-flex align-items-center">
+                <p>Backup App</p>
                 <!-- Search form -->
-                <form class="navbar-search form-inline" id="navbar-search-main">
+                <!-- <form class="navbar-search form-inline" id="navbar-search-main">
                 <div class="input-group input-group-merge search-bar">
                     <span class="input-group-text" id="topbar-addon">
                         <svg class="icon icon-xs" x-description="Heroicon name: solid/search" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
@@ -179,7 +182,7 @@
                     </span>
                     <input type="text" class="form-control" id="topbarInputIconLeft" placeholder="Search" aria-label="Search" aria-describedby="topbar-addon">
                 </div>
-                </form>
+                </form> -->
                 <!-- / Search form -->
             </div>
             <!-- Navbar links -->
@@ -337,7 +340,7 @@
 
 
     <div class="py-4">
-        <nav aria-label="breadcrumb" class="d-none d-md-inline-block">
+        <!-- <nav aria-label="breadcrumb" class="d-none d-md-inline-block">
             <ol class="breadcrumb breadcrumb-dark breadcrumb-transparent">
                 <li class="breadcrumb-item">
                     <a href="#">
@@ -347,7 +350,7 @@
                 <li class="breadcrumb-item"><a href="#">Volt</a></li>
                 <li class="breadcrumb-item active" aria-current="page">Transactions</li>
             </ol>
-        </nav>
+        </nav> -->
         <div class="" style="min-height: 58vh;">
             @yield('content')
         </div>
@@ -394,7 +397,7 @@
         </div>
     </div>
 
-    <footer class="bg-white rounded shadow p-5 mb-4 mt-4">
+    <footer class="bg-white rounded shadow p-5 mb-4 mt-4 d-none">
         <div class="row">
             <div class="col-12 col-md-4 col-xl-6 mb-4 mb-md-0">
                 <p class="mb-0 text-center text-lg-start">©<span class="current-year"></span> <a class="text-primary fw-normal" href="javascript::void(0)">Themesberg</a></p>

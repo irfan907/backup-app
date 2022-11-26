@@ -32,6 +32,12 @@ class AppServiceProvider extends ServiceProvider
                 //             'permissions' => [],
                 //             'title' => 'Dashboard'
                 //         ],
+                'file' => [
+                            'icon' => 'fas fa-files',
+                            'route_name' => 'file_management',
+                            'permissions' => ['users-view'],
+                            'title' => 'File Manager'
+                        ],
                 'administration' => [
                             'icon' => 'fas fa-users',
                             'title' => 'Administration',

@@ -220,7 +220,7 @@
                             </div>
 
                             {{-- editor --}}
-                            <div class="control" v-show="!isBulkSelecting()">
+                            <!-- <div class="control" v-show="!isBulkSelecting()">
                                 <button class="button is-link"
                                     ref="editor"
                                     :disabled="editor_btn_disable"
@@ -230,7 +230,7 @@
                                     <span class="icon"><icon name="regular/object-ungroup" scale="1.2"></icon></span>
                                     <span>{{ trans('MediaManager::messages.editor.main') }}</span>
                                 </button>
-                            </div>
+                            </div> -->
 
                             {{-- delete --}}
                             <div class="control">
@@ -267,7 +267,7 @@
                             </div>
 
                             {{-- lock --}}
-                            <div class="control">
+                            <!-- <div class="control">
                                 <button class="button is-warning"
                                     ref="lock"
                                     :disabled="lock_btn_disable"
@@ -278,10 +278,10 @@
                                         <icon :name="IsLocked(selectedFile) ? 'lock' : 'lock-open'"></icon>
                                     </span>
                                 </button>
-                            </div>
+                            </div> -->
 
                             {{-- visibility --}}
-                            <div class="control">
+                            <!-- <div class="control">
                                 <button class="button"
                                     :class="IsVisible(selectedFile) ? 'is-light' : 'is-danger'"
                                     ref="visibility"
@@ -293,7 +293,7 @@
                                         <icon :name="IsVisible(selectedFile) ? 'eye' : 'eye-slash'"></icon>
                                     </span>
                                 </button>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
 
@@ -379,9 +379,9 @@
                                     </p>
 
                                     {{-- voice --}}
-                                    <p class="control">
+                                    <!-- <p class="control">
                                         <voice-search :trans="trans" :search-for="searchFor"></voice-search>
-                                    </p>
+                                    </p> -->
 
                                     {{-- local --}}
                                     <p class="control has-icons-left">
