@@ -115,6 +115,7 @@
                                     <!-- <li><a class="dropdown-item" href="#">Copy</a></li>
                                     <li><a class="dropdown-item" href="#">Cut</a></li> -->
                                     <li><a class="dropdown-item" wire:click.prevent="$emit('renameFile','{{ $file }}')">Rename</a></li>
+                                    <li><a class="dropdown-item" wire:click.prevent="downloadFile('{{ $tfile }}')">Download</a></li>
                                   <li><a class="dropdown-item text-danger" wire:click.prevent="$emit('confirmDeleteFile','{{ $file }}')">Delete</a></li>
                                 </ul>
                             </div>

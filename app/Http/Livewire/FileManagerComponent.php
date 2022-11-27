@@ -162,6 +162,11 @@ class FileManagerComponent extends Component
         $this->dispatchBrowserEvent('success-notification',['message'=>'Files'.$this->selectedMode=='copy' ? 'Copied':'Moved'. 'Successfully']);
     }
 
+    public function downloadFile($path)
+    {
+        return Storage::disk('s3')->download($path);    
+    }
+
     public function getFiles()
     {
         try {
