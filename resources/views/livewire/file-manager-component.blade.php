@@ -29,21 +29,20 @@
 
             <div class="py-2 d-flex justify-content-between align-items-center">
                 <div>
+                    @can('files-upload')
                     <button type="button" class="btn btn-primary mr-2" data-bs-toggle="modal" data-bs-target="#modal-upload-files"><i class="fas fa-upload"></i>&nbsp; Upload</button>
+                    @endcan
+                    @can('folder-create')
                     <button type="button" class="btn btn-primary mr-2" wire:click.prevent="$emit('newDir')"><i class="fas fa-add"></i>&nbsp; New Folder</button>
+                    @endcan
+                    @can('files-copy-and-cut')
                     <button type="button" class="btn btn-primary mr-2" wire:click.prevent="copyFiles" {{ $selectedMode=='copy' || $selectedFiles==[] ? 'disabled':'' }} id="copy-selected-btn">Copy</button>
                     <button type="button" class="btn btn-primary mr-2" wire:click.prevent="cutFiles" {{ $selectedMode=='cut' || $selectedFiles==[] ? 'disabled':'' }} id="cut-selected-btn">Cut</button>
                     <button type="button" class="btn btn-primary mr-2" wire:click.prevent="pasteFiles" {{ $selectedFiles==[] || !$selectedMode ? 'disabled':'' }}>Paste Here</button>
+                    @endcan
+                    @can('files-delete')
                     <button type="button" class="btn btn-danger mr-2" wire:click.prevent="$emit('confirmDeleteSelected')" {{ $selectedFiles==[]  ? 'disabled':'' }} id="delete-selected-btn">Delete Selected</button>
-                    <button type="button" class="btn btn-secondary icon-btn mr-2" disabled=""><i class="fas fa-download"></i></button>
-                    <div class="btn-group mr-2">
-                        <button type="button" disabled class="btn btn-default md-btn-flat dropdown-toggle px-2" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-cog"></i></button>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                            <a class="dropdown-item" href="javascript:void(0)">Move</a>
-                            <a class="dropdown-item" href="javascript:void(0)">Copy</a>
-                            <a class="dropdown-item" href="javascript:void(0)">Remove</a>
-                        </div>
-                    </div>
+                    @endcan
                     <button type="button" title="Refresh" class="btn btn-info icon-btn mr-2" wire:click.prevent="refresh"><i class="fas fa-refresh"></i></button>
                 </div>
                 <div>
@@ -81,7 +80,9 @@
                                     <!-- <li><a class="dropdown-item" href="#">Copy</a></li>
                                     <li><a class="dropdown-item" href="#">Cut</a></li> -->
                                     <!-- <li><a class="dropdown-item" wire:click.prevent="$emit('renameDir','{{ $directory }}')">Rename</a></li> -->
+                                    @can('folder-delete')
                                   <li><a class="dropdown-item text-danger" wire:click.prevent="$emit('confirmDeleteDir','{{ $directory }}')">Delete</a></li>
+                                  @endcan
                                 </ul>
                               </div>
                         </div>
@@ -114,9 +115,15 @@
                                 <ul class="dropdown-menu" aria-labelledby="file-dropdown{{ $key }}">
                                     <!-- <li><a class="dropdown-item" href="#">Copy</a></li>
                                     <li><a class="dropdown-item" href="#">Cut</a></li> -->
+                                    @can('files-rename')
                                     <li><a class="dropdown-item" wire:click.prevent="$emit('renameFile','{{ $file }}')">Rename</a></li>
+                                    @endcan
+                                    @can('files-download')
                                     <li><a class="dropdown-item" wire:click.prevent="downloadFile('{{ $tfile }}')">Download</a></li>
+                                    @endcan
+                                    @can('files-delete')
                                   <li><a class="dropdown-item text-danger" wire:click.prevent="$emit('confirmDeleteFile','{{ $file }}')">Delete</a></li>
+                                  @endcan
                                 </ul>
                             </div>
                         </div>

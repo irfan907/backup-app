@@ -20,6 +20,7 @@ class PageController extends Controller
 
     public function fileMangement()
     {
+        $this->authorize('files-view');
         return view('filemanager');
     }
 }

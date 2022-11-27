@@ -29,6 +29,16 @@ class PermissionSeeder extends Seeder
         Permission::create(['name' => 'roles-edit']);
         Permission::create(['name' => 'roles-delete']);
 
+        Permission::create(['name' => 'files-view']);
+        Permission::create(['name' => 'files-upload']);
+        Permission::create(['name' => 'files-download']);
+        Permission::create(['name' => 'files-rename']);
+        Permission::create(['name' => 'files-copy-and-cut']);
+        Permission::create(['name' => 'files-delete']);
+
+        Permission::create(['name' => 'folder-create']);
+        Permission::create(['name' => 'folder-delete']);
+
         $super_admin=Role::updateOrCreate(['name'=>'SuperAdmin']);
 
         $user=User::updateOrCreate(
