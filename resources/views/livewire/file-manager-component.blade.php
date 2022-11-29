@@ -30,7 +30,7 @@
             <div class="py-2 d-flex justify-content-between align-items-center">
                 <div>
                     @can('files-upload')
-                    <button type="button" class="btn btn-primary mr-2" data-bs-toggle="modal" data-bs-target="#modal-upload-files"><i class="fas fa-upload"></i>&nbsp; Upload</button>
+                    <!-- <button type="button" class="btn btn-primary mr-2" data-bs-toggle="modal" data-bs-target="#modal-upload-files"><i class="fas fa-upload"></i>&nbsp; Upload</button> -->
                     @endcan
                     @can('folder-create')
                     <button type="button" class="btn btn-primary mr-2" wire:click.prevent="$emit('newDir')"><i class="fas fa-add"></i>&nbsp; New Folder</button>
