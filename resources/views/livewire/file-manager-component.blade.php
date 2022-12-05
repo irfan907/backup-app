@@ -29,8 +29,8 @@
 
             <div class="py-2 d-flex justify-content-between align-items-center">
                 <div>
-                    @can('files-upload')
-                    <!-- <button type="button" class="btn btn-primary mr-2" data-bs-toggle="modal" data-bs-target="#modal-upload-files"><i class="fas fa-upload"></i>&nbsp; Upload</button> -->
+                    <!-- @can('files-upload')
+                    <button type="button" class="btn btn-primary mr-2 d-none" data-bs-toggle="modal" data-bs-target="#modal-upload-files"><i class="fas fa-upload"></i>&nbsp; Upload</button>
                     @endcan
                     @can('folder-create')
                     <button type="button" class="btn btn-primary mr-2" wire:click.prevent="$emit('newDir')"><i class="fas fa-add"></i>&nbsp; New Folder</button>
@@ -42,7 +42,7 @@
                     @endcan
                     @can('files-delete')
                     <button type="button" class="btn btn-danger mr-2" wire:click.prevent="$emit('confirmDeleteSelected')" {{ $selectedFiles==[]  ? 'disabled':'' }} id="delete-selected-btn">Delete Selected</button>
-                    @endcan
+                    @endcan -->
                     <button type="button" title="Refresh" class="btn btn-info icon-btn mr-2" wire:click.prevent="refresh"><i class="fas fa-refresh"></i></button>
                 </div>
                 <div>
