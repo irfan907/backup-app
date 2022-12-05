@@ -66,13 +66,13 @@
             @endphp
             <div class="col-2 p-0 searchable-parent" id="dir-{{ $key }}">
                 <div class="bg-white p-2 m-1 h-100">
-                    <div class="align-items-center d-flex justify-content-end">
+                    <div class="align-items-center d-flex justify-content-end mb-3">
                         <div class="form-check d-none">
                             <input class="form-check-input select-file-check" wire:model.defer="selectedFiles" type="checkbox" value="{{ $tdirectory }}" id="defaultCheck{{ $key }}">
                             <label class="form-check-label" for="defaultCheck{{ $key }}"></label>
                         </div>
                         <div>
-                            <div class="dropdown">
+                            <div class="dropdown d-none">
                                 <button class="btn btn-sm dropdown-toggle" type="button" id="dir-dropdown{{ $key }}" data-bs-toggle="dropdown" aria-expanded="false">
                                   <i class="fa-solid fa-ellipsis-vertical"></i>
                                 </button>
@@ -81,7 +81,7 @@
                                     <li><a class="dropdown-item" href="#">Cut</a></li> -->
                                     <!-- <li><a class="dropdown-item" wire:click.prevent="$emit('renameDir','{{ $directory }}')">Rename</a></li> -->
                                     @can('folder-delete')
-                                  <li><a class="dropdown-item text-danger" wire:click.prevent="$emit('confirmDeleteDir','{{ $directory }}')">Delete</a></li>
+                                  <!-- <li><a class="dropdown-item text-danger" wire:click.prevent="$emit('confirmDeleteDir','{{ $directory }}')">Delete</a></li> -->
                                   @endcan
                                 </ul>
                               </div>
@@ -116,13 +116,13 @@
                                     <!-- <li><a class="dropdown-item" href="#">Copy</a></li>
                                     <li><a class="dropdown-item" href="#">Cut</a></li> -->
                                     @can('files-rename')
-                                    <li><a class="dropdown-item" wire:click.prevent="$emit('renameFile','{{ $file }}')">Rename</a></li>
+                                    <!-- <li><a class="dropdown-item" wire:click.prevent="$emit('renameFile','{{ $file }}')">Rename</a></li> -->
                                     @endcan
                                     @can('files-download')
                                     <li><a class="dropdown-item" wire:click.prevent="downloadFile('{{ $tfile }}')">Download</a></li>
                                     @endcan
                                     @can('files-delete')
-                                  <li><a class="dropdown-item text-danger" wire:click.prevent="$emit('confirmDeleteFile','{{ $file }}')">Delete</a></li>
+                                  <!-- <li><a class="dropdown-item text-danger" wire:click.prevent="$emit('confirmDeleteFile','{{ $file }}')">Delete</a></li> -->
                                   @endcan
                                 </ul>
                             </div>
